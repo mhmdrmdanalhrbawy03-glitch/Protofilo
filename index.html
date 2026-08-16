@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد رمضان حرباوي | منشئ محتوى ومطور منصات تعليمية</title>
+    <!-- خطوط وأيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #f97316; /* برتقالي متناسق مع هوية المؤسسة */
+            --secondary-color: #2563eb;
+            --accent-color: #10b981;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --text-color: #334155;
+            --card-bg: #ffffff;
+        }
+
+        /* تنسيقات الوضع المظلم */
+        body.dark-mode {
+            --primary-color: #fb923c;
+            --secondary-color: #60a5fa;
+            --dark-color: #f8fafc;
+            --light-color: #0f172a;
+            --text-color: #cbd5e1;
+            --card-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* القائمة العلوية */
+        header {
+            background-color: var(--card-bg);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover, .logo-partner span {
+            color: var(--primary-color);
+        }
+
+        /* زر الوضع المظلم */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* واجهة الموقع الرئيسية */
+        .hero {
+            padding: 10rem 2rem 6rem 2rem;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .brand-badge {
+            background-color: rgba(249, 115, 22, 0.1);
+            color: var(--primary-color);
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--dark-color);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        /* تأثير الكتابة الحية */
+        .typed-text {
+            color: var(--primary-color);
+            border-left: 2px solid var(--primary-color);
+            padding-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        /* قسم الرعاية والشريك التقني */
+        .sponsor-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .sponsor-text {
+            text-align: right;
+        }
+
+        .sponsor-text h4 {
+            font-size: 1rem;
+            color: var(--dark-color);
+        }
+
+        .sponsor-text p {
+            font-size: 0.85rem;
+            margin: 0;
+            color: #64748b;
+        }
+
+        /* زر اتجاهات الطلاب الجانبي التفاعلي (صعود ونزول) */
+        .scroll-controls {
+            position: fixed;
+            left: 30px;
+            bottom: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1001;
+        }
+
+        .scroll-btn {
+            width: 45px;
+            height: 45px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* زر الواتساب المضيء الفخم على اليسار */
+        .whatsapp-left-glow {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            z-index: 1001;
+            text-decoration: none;
+            box-shadow: 0 0 20px #25d366;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from { box-shadow: 0 0 10px #25d366, 0 0 20px #25d366; }
+            to { box-shadow: 0 0 20px #25d366, 0 0 35px #25d366; transform: scale(1.05); }
+        }
+
+        /* الأقسام والميزات العامّة */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        /* صندوق الإعلان لتطبيق التفوق */
+        .app-promo-card {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #0f172a 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+            border: 2px solid var(--primary-color);
+            position: relative;
+        }
+
+        .app-promo-card .badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* العدادات التفاعلية */
+        .stats-section {
+            background-color: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* نظام الأسئلة الشائعة الموسّع */
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0,0,0,0.01);
+        }
+
+        .faq-answer {
+            padding: 0 1.2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease-out;
+            opacity: 0;
+            color: #64748b;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.2rem;
+            max-height: 200px;
+            opacity: 1;
+            border-top: 1px solid rgba(0,0,0,0.03);
+        }
+
+        /* التذييل زر تواصل مباشر للمؤسسة */
+        .footer-banner {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+            margin-top: 4rem;
+        }
+
+        .btn-call {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            margin-top: 1.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .scroll-controls { left: 15px; bottom: 110px; }
+            .whatsapp-left-glow { left: 15px; bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fa-solid fa-cubes"></i>
+                <span>م. محمد رمضان حرباوي</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدمات التطوير</a></li>
+                <li><a href="#app">تطبيق التفوق</a></li>
+                <li><a href="#faq">الأسئلة الشائعة</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="brand-badge">
+                <i class="fa-solid fa-shield-halved"></i> الشريك التقني المعتمد والموثوق
+            </div>
+            <h1>مرحباً، أنا <span class="typed-text" id="typewriter"></span></h1>
+            <p>متخصص في إنشاء وتطوير المنصات الرقمية والمواقع التعليمية والخدمية المبتكرة وتطبيقات الموبايل بأحدث تقنيات الذكاء الاصطناعي وبأعلى معايير الكفاءة البرمجية.</p>
+            
+            <!-- صندوق الشريك الفخم المربوط بصورتك ومؤسستك -->
+            <div class="sponsor-box">
+                <!-- أيقونة برمجية رمزية مطابقة ومستوحاة تماماً من شعار مؤسسة الحرباوي للإنشاءات والدهانات والكهرباء المرفق بالطلب -->
+                <div style="background-color: #1e293b; color: #f97316; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid #f97316;">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <div class="sponsor-text">
+                    <h4>برعاية مؤسسة الحرباوي الرسمية</h4>
+                    <p>المطور والشريك التقني المعتمد للمؤسسة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="scroll-controls">
+        <button class="scroll-btn" onclick="scrollToTop()" title="صعود لأعلى الموقع"><i class="fa-solid fa-arrow-up"></i></button>
+        <button class="scroll-btn" onclick="scrollToBottom()" title="نزول لأسفل الموقع"><i class="fa-solid fa-arrow-down"></i></button>
+    </div>
+
+    <a href="https://wa.me/201007978423?text=مرحباً%20مؤسسة%20الحرباوي،%20أريد%20الاستفسار%20عن%20الخدمات%20والمنصات%20الرقمية" class="whatsapp-left-glow" target="_blank" rel="noopener noreferrer" title="تواصل عبر واتساب المؤسسة">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <section id="services" class="reveal">
+        <div class="section-header">
+            <h2>ماذا نقدم من حلول رقمية?</h2>
+            <p>نقوم ببرمجة وتأسيس البنية التحتية للمواقع والمنصات التفاعلية بأدوات برمجية متميزة</p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <h3><i class="fa-solid fa-laptop-code" style="color:var(--primary-color)"></i> بناء المنصات الذكية</h3>
+                <p>تطوير مواقع ومنصات تفاعلية قادرة على استيعاب آلاف المستخدمين والطلاب معاً بسلاسة تامة وبأمان فائق.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-mobile-screen-button" style="color:var(--primary-color)"></i> تطبيقات الموبايل</h3>
+                <p>تصميم مخصص وبرمجة مرنة ومتكاملة لتقديم خدمات سريعة وتجربة مستخدم لا مثيل لها عبر الهواتف الذكية.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--primary-color)"></i> ربط الذكاء الاصطناعي</h3>
+                <p>دمج أدوات التوليد الآلي والـ AI المتقدمة لمساعدة الطلاب والمستخدمين في إيجاد إجابات وحلول مخصصة ومبتكرة.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="app" class="reveal">
+        <div class="app-promo-card">
+            <span class="badge">قريباً جداً</span>
+            <h2>🚀 إطلاق تطبيق التفوق التعليمي الجديد</h2>
+            <p style="max-width: 700px; margin: 1rem auto 2rem auto; color: #94a3b8;">المشروع الأضخم لخدمة ودعم الطلاب! تطبيق ذكي ومتكامل ومبني كلياً بأدوات تقنية تضمن التفوق الدراسي والتفاعل السلس مع المواد التعليمية والاختبارات الذكية.</p>
+            <div style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color);">ترقبوا الإطلاق الرسمي الأقوى بالكامل تحت إشراف المطور محمد رمضان</div>
+        </div>
+    </section>
+
+    <section class="stats-section grid-3 reveal" id="stats">
+        <div class="stat-box">
+            <div class="stat-number" data-target="24">0</div>
+            <p>منصة وموقع تم تطويرها</p>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" data-target="1500">0</div>
+            <p>طالب مستفيد نشط</p>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" data-target="100">0</div>
+            <p>جودة وكفاءة برمجية %</p>
+        </div>
+    </section>
+
+    <section id="faq" class="reveal">
+        <div class="section-header">
+            <h2>الأسئلة الشائعة والإجابات عنها</h2>
+            <p>اضغط على السؤال لتظهر لك الإجابة المباشرة والكاملة حول الهوية والمنصات</p>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-item">
+                <div class="faq-question">هل محمد رمضان منشئ محتوى أم مدرس؟ <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">محمد رمضان حرباوي هو صانع محتوى رقمي ومطور منصات برمجية محترف ومتميز، يقوم بإنشاء وبناء المواقع والمنصات التعليمية والخدمية للمؤسسات والأفراد وليس مدرساً للمواد.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">ما هو تطبيق التفوق التعليمي القادم؟ <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">هو تطبيق ذكي للهواتف المحمولة نقوم بتطويره لمساعدة الطلاب على إدارة مسيرتهم التعليمية، وحل الاختبارات، والحصول على تجربة دراسية تفاعلية مدعومة بالذكاء الاصطناعي.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">ما علاقة الموقع بمؤسسة الحرباوي المذكورة بالواجهة؟ <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">الموقع والمنشئ الرقمي محمد رمضان يعملان برعاية رسمية من مؤسسة الحرباوي، حيث يمثل المطور الشريك التقني والتكنولوجي المعتمد والموثوق لكافة مشاريعها الرقمية.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">كيف يمكنني طلب موقع إلكتروني أو تطبيق مخصص لي؟ <i class="fa-solid fa-chevron-down"></i></div>
+                <div class="faq-answer">يمكنك التواصل معنا فوراً وببساطة عبر الضغط على أزرار الاتصال أو أيقونة الواتساب المضيئة على اليسار لطلب استشارتك التقنية والبدء ببرمجة مشروعك فوراً وبأعلى احترافية.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-banner reveal">
+        <h2>تواصل الآن مع الشريك التقني للمؤسسة</h2>
+        <p>لبناء منصتك التعليمية، موقعك الخاص، أو للاستفسار عن تطبيق التفوق، تواصل مباشرة معنا عبر رقم الهاتف الموحد</p>
+        <a href="tel:01007978423" class="btn-call"><i class="fa-solid fa-phone-volume"></i> اتصل بالمؤسسة: 01007978423</a>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 | المنشئ الرقمي محمد رمضان حرباوي برعاية مؤسسة الحرباوي</p>
+    </footer>
+
+    <script>
+        // تأثير الكتابة التلقائية الحية المستمرة بالواجهة
+        const words = ["محمد رمضان حرباوي", "منشئ المحتوى الرقمي", "مطور المنصات والمواقع"];
+        let i = 0, timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typewriter').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typewriter').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) i++;
+                    else i = 0;
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 60);
+            };
+            loopDeleting();
+        }
+        typingEffect();
+
+        // تفعيل النمط والوضع المظلم بلمسة ذكية واحدة
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.theme-toggle i');
+            if(document.body.classList.contains('dark-mode')) {
+                icon.className = 'fa-solid fa-sun';
+            } else {
+                icon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        // أزرار اتجاهات الطلاب السريعة (الطلوع والنزول الفوري والناعم للموقع)
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        // تشغيل نظام فتح وإغلاق الأسئلة الشائعة الأكورديون
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const activeItem = document.querySelector('.faq-item.active');
+                if (activeItem && activeItem !== item) {
+                    activeItem.classList.remove('active');
+                }
+                item.classList.toggle('active');
+            });
+        });
+
+        // حركة وظيفة العدادات الرقمية التصاعدية عند تمرير الماوس ونزول الطالب للشاشة
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // تفعيل تأثيرات الـ Scroll Reveal لرؤية العناصر تدريجياً وبسلاسة
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    reveals[i].classList.add("active");
+                    if(reveals[i].id === 'stats') startCounters();
+                }
+            }
+        }
+        window.addEventListener("scroll", revealOnScroll);
+        window.addEventListener("load", revealOnScroll);
+    </script>
+</body>
+</html>
